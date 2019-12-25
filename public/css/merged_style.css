@@ -1,0 +1,249 @@
+.area {
+    width: 100%;
+    float: left;
+}
+.area-services li{
+    border: none !important;
+}
+.wrapper {
+
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.contact {
+    padding: 20px;
+    font-size: 12px;
+    background-color: #333333;
+    color: #eeeeee;
+}
+.contact a {
+    color: #eeeeee;
+}
+.contact h3 {
+    font-size: 2.1rem
+}
+.contact ul {
+    float: right;
+}
+.contact li {
+    display: inline-block;
+    margin: 0 8px;
+    font-size: 12px
+}
+
+.advisor {
+    margin: 20px auto 0 auto;
+    font-size: 11px;
+    width: 90%;
+    max-width: 450px
+}
+.advisor h4 {
+    font-size: 12px;
+    font-weight: bold
+}
+.adv {
+    float: left;
+    width: 60%;
+    margin-top: 20px
+}
+.copyright {
+    float: left;
+}
+
+.socila {
+    float: right;
+    margin-top: 12px;
+}
+.socila img {
+    width: 28px;
+}
+
+.massages-title {
+    background: transparent;
+    color: #6abf58;
+
+}
+.service_alert {
+    background: #fff;
+    margin-bottom: 20px;
+    display: flex;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);
+}
+.service_alert > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.service_alert .icon {
+    flex: none;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    font-size: 35px;
+}
+
+.service_alert .massages {
+    padding-left: 20px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.service_alert .massages .alert-title {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.service_alert .massages .alert-body {
+    color: #6d6d6d;
+}
+
+.service_alert.success .icon {
+    background: #6abf58;
+    color: #fff;
+}
+
+.service_alert.success .alert-title {
+    color: #69bf57;
+}
+.service_alert.fsuccess .icon {
+    background: #6abf58;
+    color: #fff;
+}
+
+.service_alert.fsuccess .alert-title {
+    color: #69bf57;
+}
+.service_alert.info .icon {
+    background: #1ebee0;
+    color: #fff;
+}
+
+.service_alert.info .alert-title {
+    color: #1ebee0;
+}
+
+.service_alert.warning .icon {
+    background: #f79029;
+    color: #fff;
+}
+
+.service_alert.warning .alert-title {
+    color: #f79029;
+}
+
+.service_alert.danger .icon {
+    background: #ee3a47;
+    color: #fff;
+}
+
+.service_alert.danger .alert-title {
+    color: #ee3a47;
+}
+
+
+
+.services li {
+    float: left;
+    width: 23%;
+    background-color: #fff;
+    margin-right: 2.6%;
+    margin-bottom: 2.6%;
+    text-align: center;
+    border-radius: 5px;
+    border: solid 1px #e7e7e7;
+}
+.services li:nth-child(4n) {
+    margin-right: 0;
+}
+.services li:hover {
+    border: solid 1px #e72b3c;
+}
+.services li a {
+    padding: 30px 10px;
+    display: block;
+    text-decoration: none;
+}
+.services li img {
+    height: 64px;
+    width: auto
+}
+.services li strong {
+    display: block
+}
+
+.area-services li{
+    border: none !important;
+}
+.purchase-label{
+    display: inline-grid !important;
+}
+.purchase-label:before {
+    position: absolute;
+    margin-left: 5px;
+}
+.detail-area {
+    padding-left: 12px;
+}
+.operator-logo{
+    max-height: 30px;
+}
+.content_area{
+    min-height: 74.5vh;
+}
+a:focus, a:hover {
+    color: #23527c;
+    text-decoration: none !important;
+}
+.imgsize{
+    max-width: 100% !important;
+}
+
+
+
+.modal {
+}
+.modal-title{
+    color: #ef4854;
+}
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+}
+
+
+@media only screen and (max-width : 600px) {
+    .contact {
+        text-align: center;
+    }
+    .area.testimonial, .adv {
+        display: none;
+    }
+
+    .socila {
+        width: 100%;
+        text-align: center;
+    }
+    .contact ul {
+        float: none;
+    }
+}
