@@ -74,7 +74,6 @@ class ServiceController extends Controller
                 $page = 'services.bangladesh_reload';
                 break;
             case 'nepal_reload':
-
                 $page = 'services.nepal_reload';
                 break;
             case 'bd_mb_reload':
@@ -92,15 +91,8 @@ class ServiceController extends Controller
             default:
                 $page = 'services.'.$service['type'];
         }
-        if($service['is_verified']) {
-            if (session('is_verified') == 1) {
-                return $this->loadView($page . '.index', $data);
-            } else {
-                return $this->loadView('services.verify_msg')->withErrors('Please verify your profile to use this service');
-            }
-        }else{
-            return $this->loadView($page . '.index', $data);
-        }
+
+        return $this->loadView($page . '.index', $data);
     }
     public function getRates($keyword)
     {

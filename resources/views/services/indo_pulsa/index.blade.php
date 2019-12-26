@@ -27,11 +27,28 @@
                     </ul>
                 </div>
             </div>
-            <div class="panel ammount">
+            {{--<div class="panel ammount">
                 <h2>Select Amount</h2>
                 <div class="panelcontent">
                     <ul id="radio-option2">
 
+
+                    </ul>
+                </div>
+            </div>--}}
+            <div class="panel ammount">
+                <h2>Select Amount</h2>
+                <div class="panelcontent">
+                    <ul id="radio-option2">
+                        @foreach((array)$amounts as $index => $amount)
+                            <li>
+                                <div class="selectarea radiogroup">
+                                    <input {{0 === $index? 'checked' : ''}} name="amount" type="radio" value="{{ $amount['amount'] }}" id="rate-{{ $index }}" required/>
+
+                                </div>
+                                {{$amount['amount']}}
+                            </li>
+                        @endforeach
 
                     </ul>
                 </div>
@@ -56,7 +73,7 @@
 @section('footer-script')
     <script>
 
-        $("#receiver_mobile_number").keydown(function(e) {
+        /*$("#receiver_mobile_number").keydown(function(e) {
             var oldvalue=$(this).val();
             var field=this;
             setTimeout(function () {
@@ -107,6 +124,6 @@
                 }
                 rateWrapper.html(innerText);
             });
-        }
+        }*/
     </script>
 @stop

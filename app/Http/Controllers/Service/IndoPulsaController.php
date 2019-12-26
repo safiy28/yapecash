@@ -32,10 +32,10 @@ class IndoPulsaController extends Controller
         $operators = Http::get('service-operators',['service_id' => session('service_id')]);
         $operators = parseApiResponse($operators);
         $data['operators'] = $operators['operators'];
-        $pulsa = explode(':', $inputs['amount']);
+        /*$pulsa = explode(':', $inputs['amount']);
         $inputs['amount'] = $pulsa[1];
         $inputs['pulsa_code'] = $pulsa[0];
-        session(['pulsa_code' => $inputs['pulsa_code']]);
+        session(['pulsa_code' => $inputs['pulsa_code']]);*/
         $chargeCalculationInputs = [
             'service_id' => session('service_id'),
             'receiver_mobile' => session('receiver_mobile_number'),
@@ -62,13 +62,13 @@ class IndoPulsaController extends Controller
         ]);
         $inputs = $request->except('_token');
 
-        $inputs['pulsa_code'] = session('pulsa_code');
+        //$inputs['pulsa_code'] = session('pulsa_code');
         $data = [];
         $data['service_id'] = session('service_id');
         $data['service_amount'] = (double) $inputs['amount'];
         $data['receiver_mobile'] = $inputs['receiver_mobile_number'];
         $data['operator'] = $inputs['operator'];
-        $data['pulsa_code'] = $inputs['pulsa_code'];
+        //$data['pulsa_code'] = $inputs['pulsa_code'];
         $data['pin'] = $inputs['pin'];
         $service_result = Http::post('pulsa-topup',$data);
         $service_result = parseApiResponse($service_result);
@@ -82,7 +82,7 @@ class IndoPulsaController extends Controller
         $operators = Http::get('service-operators',['service_id' => session('service_id')]);
         $operators = parseApiResponse($operators);
         $data['operators'] = $operators['operators'];
-        $inputs['pulsa_code'] = session(['pulsa_code']);
+        //$inputs['pulsa_code'] = session(['pulsa_code']);
         $chargeCalculationInputs = [
             'service_id' => session('service_id'),
             'receiver_mobile' => session('receiver_mobile_number'),
