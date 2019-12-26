@@ -6,8 +6,8 @@
             </span>
         </h2>
         <ul>
-            <li>Total Balance: <strong>{{session('total_points')?:'No'}} AUD</strong></li>
-            <li>Available Balance: <strong>{{session('available_points')?:'No'}} AUD</strong></li>
+            <li>Total Balance: <strong>{{session('total_points')?:'No'}} Points</strong></li>
+            <li>Available Balance: <strong>{{session('available_points')?:'No'}} Points</strong></li>
         </ul>
     </div>
 </div>
