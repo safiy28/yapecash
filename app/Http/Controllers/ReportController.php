@@ -3,7 +3,7 @@
 use App\Backend;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Http;
+use App\Facades\HttpClient\Http;
 use Illuminate\Support\Facades\Validator;
 class ReportController extends Controller
 {
@@ -287,8 +287,8 @@ class ReportController extends Controller
             'from' => $from,
             'word' => $word
         ];
-        $reports = Http::get('bank-report',$data);
-        $reports = parseApiResponse($reports);//dd($reports);
+        $reports = Http::get('bank-report',$data);//dd($reports);
+        $reports = parseApiResponse($reports);
         $page_info['last_page'] = $reports['last_page'];
         $page_info['current_page'] = $reports['current_page'];
         $page_info['next_page'] = null !== $reports['next_page_url'];
@@ -321,23 +321,7 @@ class ReportController extends Controller
             return redirect()->back()->withErrors($report['reason']);
         }
     }
-    public function getTrangloRate(Request $request) {
 
-        $input = $request->only('id');
-        $data = [];
-        $data['id'] = $input['id'];
-        $result = Http::get('tranglo-rate',$data);
-        return $result = parseApiResponse($result);//dd($result);
-    }
-    public function getTrangloValidation(Request $request) {
-
-        $input = $request->all();
-        $data = [];
-        $data['id'] = $input['id'];
-        $data['report_type'] = $input['report_type'];
-        $result = Http::get('tranglo-validation',$data);
-        return $result = parseApiResponse($result);
-    }
     public function tranglotracker()
     {
         $result = Http::get('tranglo-balance');

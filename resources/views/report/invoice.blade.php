@@ -33,9 +33,9 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="invoice-title">
-                <h2><img width="250px" src="https://mycashmy.com/images/mycash-point-logo.png" alt="mycash point"/></h2>
+                <h2><img width="250px" src="{{url('images/yape-logo-big.png')}}" alt="mycash point"/></h2>
                 <h4 align="right" class="pull-right">Transaction ID: {{$t_report['transaction_no']}}
-                    <br>{{Carbon\Carbon::parse($t_report['created_at'])->format('M d, Y h:m:s ')}}AUT
+                    <br>{{Carbon\Carbon::parse($t_report['created_at'])->format('M d, Y h:m:s ')}}MYT
                 </h4><hr>
             </div>
         </div>
@@ -150,11 +150,11 @@
                                 <td style="width: 25%"><strong>Beneficiary Name</strong></td>
                                 <td style="width: 30%">{{$rec['name']}}</td>
                                 <td style="width: 19%"><strong>Bank Name</strong></td>
-                                <td style="width: 26%">{{$rec['recipient_banks']['name']}}</td>
+                                <td style="width: 26%">{{$rec['bank_name']}}</td>
                             </tr>
                             <tr>
                                 <td style="width: 25%"><strong>Branch Name</strong></td>
-                                <td style="width: 30%">{{$rec['recipient_bank_branch']['name']}}</td>
+                                <td style="width: 30%">{{$rec['branch_name']}}</td>
                                 <td style="width: 19%"><strong>Account No</strong></td>
                                 @if($t_report['service_id'] == 10)
                                     <td style="width: 26%">{{$t_report['account_name']}}</td>
@@ -170,21 +170,13 @@
                             </tr>
                             <tr>
                                 <td style="width: 25%"><strong>Payment Type</strong></td>
-                                @if($t_report['service_id'] == 10)
-                                    <td style="width: 30%">Wallet Remittance </td>
-                                @else
-                                    <td style="width: 30%">{{$report['transfer_mode']}}</td>
-                                @endif
+                                <td style="width: 30%">{{$report['transfer_mode']}}</td>
                                 <td style="width: 19%"><strong>Relationship</strong></td>
-                                <td style="width: 26%">{{$rec['recipient_relations']['name']}}</td>
+                                <td style="width: 26%">{{$rec['relation']}}</td>
                             </tr>
                             <tr>
                                 <td style="width: 25%"><strong>Purpose of Remittance</strong></td>
-                                @if($t_report['service_id'] == 10)
-                                    <td style="width: 30%">{{$t_report['remittance_purpose']['name']}}</td>
-                                @else
-                                    <td style="width: 30%">{{$report['remittance_purpose']['name']}}</td>
-                                @endif
+                                    <td style="width: 30%">{{$report['purpose']}}</td>
                                 <td style="width: 19%"><strong></strong></td>
                                 <td style="width: 26%"></td>
                             </tr>

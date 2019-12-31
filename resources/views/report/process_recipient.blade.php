@@ -46,15 +46,11 @@
             <div class="panelcontent">
                 <ul class="review-list">
                     <li><strong>Name :</strong> {{$report['receiver_name']}}</li>
-                    <li><strong>Relationship :</strong> {{$rec['recipient_relations']['name']}}</li>
+                    <li><strong>Relationship :</strong> {{$rec['relation']}}</li>
                     <li><strong>Phone Number :</strong> {{$report['receiver_mobile']}}</li>
-                    <li><strong>Bank Name</strong> {{$rec['recipient_banks']['name']}}</li>
+                    <li><strong>Bank Name</strong> {{$rec['bank_name']}}</li>
                     <li><strong>Bank A/C No :</strong> {{$report['bank_ac_no']}}</li>
-                    @if($rec['recipient_bank_branch']['name'])
-                    <li><strong>Branch Name :</strong> {{$rec['recipient_bank_branch']['name']}}</li>
-                    @elseif($rec['ifsc_code'])
-                     <li><strong>IFSC Code :</strong> {{$rec['ifsc_code']}}</li>
-                    @endif
+                    <li><strong>Branch Name :</strong> {{$rec['branch_name']}}</li>
                     <li><strong>PIN No :</strong> {{$report['note']}}</li>
                     <li><strong>Order ID :</strong> {{$t_report['transaction_no']}}</li>
                     @if(session('admin') === true && $report['transfer_mode'] == 'PIN Transfer')
@@ -100,15 +96,7 @@
 
         <a href="#test-popup" class="open-popup-link submitbtn">View ID</a>
         <a href="{{url('/')}}/invoice/{{$report['id']}}/1" target="_blank" id="invoiceprint" class="submitbtn">View Receipt</a>
-        @if ($report['transfer_mode'] == 'Bank Transfer')
-        @if($assignorder=='true')
-            @if($admin=='true')
 
-                <a href="#checkvalidation" class="open-popup-link submitbtn" id="get-validation">Tranglo Validation</a>
-
-            @endif
-        @endif
-        @endif
         @if($assignorder=='true')
             @if($admin=='true')
 
@@ -194,80 +182,12 @@
                         <input type="radio" class="tag" name="tag" value="city" required/> City &nbsp
                         <input type="radio" class="tag" name="tag" value="ucash" required/> Ucash &nbsp
                         <input type="radio" class="tag" name="tag" value="bank" required/> Bank &nbsp
-                        <input type="radio" class="tag" name="tag" value="tranglo" required/> Tranglo
                     </div>
                 </div>
-                <div class="panel">
-                    <h2>Tranglo Sending Amount</h2>
-                    <div class="panelcontent">
-                       <table>
-                            <tr>
-                                <td>Sending Amount</td>
-                                <td id="sAmount"> </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" id="cRate"> </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="panel">
-                    <h2>Tranglo Charge</h2>
-                    <div class="panelcontent">
-                        <table>
-                            <tr>
-                                <td>Tranglo Charge</td>
-                                <td id="charge"> </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="panel">
-                    <h2>Total</h2>
-                    <div class="panelcontent">
-                        <table>
-                            <tr>
-                                <td>Total Amount</td>
-                                <td id="total"> </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+
                 <input type="hidden" id="reportId" name="reportId" value="{{$report['id']}}">
                 <input type="hidden" id="old_amt" name="old_amt" value="{{$t_report['old_amount']}}">
                 <input type="submit" id="btn" value="Submit" class="submitbtn">
-            </form>
-        </div>
-        <div id="checkvalidation" class="white-popup mfp-hide">
-            <form>
-                <div class="panel">
-                    <h2>Tranglo Validation Status</h2>
-                    <div class="panelcontent">
-                        <table>
-                            <tr>
-                                <td>Status Code </td>
-                                <td>&nbsp:&nbsp</td>
-                                <td id="vStCode"> </td>
-                            </tr>
-                            <tr>
-                                <td>Transaction ID </td>
-                                <td>&nbsp:&nbsp</td>
-                                <td id="trxId"> </td>
-                            </tr>
-                            <tr>
-                                <td>Beneficiary Name </td>
-                                <td>&nbsp:&nbsp</td>
-                                <td id="bName"> </td>
-                            </tr>
-                            <tr>
-                                <td>Status </td>
-                                <td>&nbsp:&nbsp</td>
-                                <td id="vStatus"> </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <button type="button" onClick="closePopup();">Close</button>
             </form>
         </div>
     </div>
@@ -304,44 +224,6 @@
                     })
                 },
                 timepicker: false
-            });
-
-            $('#assign-order').click(function () {
-                var value=$('#reportId').val();
-                var amount=$('#old_amt').val();
-                $.get( "{{url('/')}}/tranglo-rate?id="+value, function(data)
-                {   //console.log(rate);
-                    if (data != null || data != "") {
-                        rate = data.forex_rate;
-                        fee = data.trx_fee;
-                        sAmount = " = "+amount + " " +  rate.CurrTo +" = " + rate.sending_amount + " " + rate.CurrFrom;
-                        cRate = "(1 " + rate.CurrFrom + " = " +  rate.CurrRate +" " + rate.CurrTo + ")";
-                        charge = " = "+ fee.TrxFee + " " +  fee.CurrencyCode;
-                        total = " = "+ rate.totalAmt + " " +  fee.CurrencyCode;
-                        $('#sAmount').html(sAmount);
-                        $('#cRate').html(cRate);
-                        $('#charge').html(charge);
-                        $('#total').html(total);
-                    }
-                });
-            });
-
-            $('#get-validation').click(function () {
-                var value=$('#reportId').val();
-                $.get( "{{url('/')}}/tranglo-validation?id="+value+"&report_type=1", function(data)
-                {   //console.log(rate);
-                    if (data != null || data != "") {
-                        validation = data.validation;
-                        vStCode = validation.ValidateStatus;
-                        trxId = validation.transID;
-                        bName = validation.BeneficiaryName;
-                        vStatus = validation.Description;
-                        $('#vStCode').html(vStCode);
-                        $('#trxId').html(trxId);
-                        $('#bName').html(bName);
-                        $('#vStatus').html(vStatus);
-                    }
-                });
             });
 
         });

@@ -37,9 +37,9 @@
                             <table class="table table-striped">
                                 <tr><td><strong>Name :</strong></td> <td>{{$recipient['name']}}</td></tr>
                                 <tr><td><strong>Mobile No :</strong></td> <td>{{$recipient['phone']}}</td></tr>
-                                <tr><td><strong>Bank Name :</strong></td> <td>{{$recipient['recipient_banks']['name']}}</td></tr>
+                                <tr><td><strong>Bank Name :</strong></td> <td>{{$recipient['bank_name']}}</td></tr>
                                 <tr><td><strong>Bank A/C No :</strong></td> <td>{{$recipient['bank_ac_no']}}</td></tr>
-                                <tr><td><strong>Branch Name/IFSC Code :</strong></td> <td>{{$recipient['recipient_bank_branch']['name'] ? $recipient['recipient_bank_branch']['name'] : $recipient['ifsc_code']}}</td></tr>
+                                <tr><td><strong>Branch Name :</strong></td> <td>{{$recipient['branch_name']}}</td></tr>
                                 <tr><td><strong>Receiving Country
                                             :</strong></td> <td>{{ucfirst((session('recipient_inputs')['country']))}}</td></tr>
                                 <tr><td><strong>Transfer Mode
@@ -56,25 +56,9 @@
                 <div class="panel">
                     <h2>Purpose of Remittance (You must fill this field)</h2>
                     <div class="panelcontent">
-                        <select id="purpose" name="purpose" class="form-control" required>
-                        <option value="">Select Purpose of Remittance</option>
-                        @foreach($remittance_purposes as $remittance_purpose)
-                            <option value="{{ $remittance_purpose['short_name'] }}">{{ $remittance_purpose['name'] }}</option>
-                        @endforeach
-                        </select>
+                        <input type="text" value="" name="purpose" id="purpose" required placeholder="Enter Purpose of Remittance">
                     </div>
                 </div>
-                    <div class="panel">
-                        <h2>Source of Fund (You must fill this field)</h2>
-                        <div class="panelcontent">
-                            <select id="source_fund" name="source_fund" class="form-control" required>
-                                <option value="">Select Source of Fund</option>
-                                @foreach($fund_sources as $fund_source)
-                                    <option value="{{ $fund_source['short_name'] }}">{{ $fund_source['name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
                 <div class="panel">
                     <h2>Pin Number</h2>
                     <div class="panelcontent">

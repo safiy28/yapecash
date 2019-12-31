@@ -82,20 +82,6 @@ class RecipientServicesController extends Controller
         }
         return $this->loadView($this->page.'.verify', $data)->with($inputs);
     }
-
-    public function calculateAuPoint($id,$amount,$country)
-    {
-        $data = [
-            'service_id' => $id,
-            'service_amount' => $amount,
-            'country' =>  $country
-        ];
-        $output = Http::get('charge',$data);
-        $output = parseApiResponse($output);
-
-        return response()->json($output);
-
-    }
     public function calculateAuWalletPoint($id,$amount,$transferType)
     {
         $data = [
@@ -126,14 +112,9 @@ class RecipientServicesController extends Controller
         $recipients = Http::get('user-recipient',$recipientInputs);
         $recipients = parseApiResponse($recipients);
 
-        $purpose_source = Http::get('remittance-purpose-source');
-        $purpose_source = parseApiResponse($purpose_source);
-
         session(['recipient_inputs' => $recipient_input]);
 
         $data['recipient'] = $recipients['recipient'];
-        $data['remittance_purposes'] = $purpose_source['remittance_purpose'];
-        $data['fund_sources'] = $purpose_source['fund_source'];
         $data['charges'] = session('recipient_charges');
         return $this->loadView($this->page.'.review', $data)->with($inputs);
     }
@@ -144,12 +125,10 @@ class RecipientServicesController extends Controller
 
         $this->validate($request, [
             'pin' => 'required',
-            'purpose' => 'required',
-            'source_fund' => 'required'
+            'purpose' => 'required'
         ]);
 
         $inputs['purpose'] = str_replace(' ', '_', $inputs['purpose']);
-        $inputs['source_fund'] = str_replace(' ', '_', $inputs['source_fund']);
         $recipient_inputs = session('recipient_inputs');
         $data = [];
 
@@ -161,7 +140,6 @@ class RecipientServicesController extends Controller
         $data['recipient_id'] = $recipient_inputs['recipient_id'];
         $data['pin'] = $inputs['pin'];
         $data['purpose'] = $inputs['purpose'];
-        $data['source_fund'] = $inputs['source_fund'];
 
 
         $service_result = Http::post('recipient-service-transfer',$data);
@@ -187,12 +165,7 @@ class RecipientServicesController extends Controller
         $recipients = Http::get('user-recipient',$recipientInputs);
         $recipients = parseApiResponse($recipients);
 
-        $purpose_source = Http::get('remittance-purpose-source');
-        $purpose_source = parseApiResponse($purpose_source);
-
         $data['recipient'] = $recipients['recipient'];
-        $data['remittance_purposes'] = $purpose_source['remittance_purpose'];
-        $data['fund_sources'] = $purpose_source['fund_source'];
         $data['charges'] = session('recipient_charges');//dd($data);
         return $this->loadView($this->page.'.review', $data)->withErrors($service_result['reason']);
     }

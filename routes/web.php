@@ -80,13 +80,11 @@ Route::post('recipient/confirm','Service\RecipientServicesController@confirm')->
 Route::post('recipient/wallet/verify','Service\RecipientServicesController@verifyRecipientWalletServices')->name('recipient.wallet.verify');
 Route::post('recipient/wallet/review','Service\RecipientServicesController@reviewRecipientWalletServices')->name('recipient.wallet.review');
 Route::post('recipient/wallet/confirm','Service\RecipientServicesController@confirmRecipientWalletServices')->name('recipient.wallet.confirm');
-Route::get('/tranglo-rate','ReportController@getTrangloRate');
 Route::get('/wallet-tranglo-rate','ReportController@getwalletTrangloRate');
 Route::get('/tranglo-status','ReportController@getTrangloStatus')->name('tranglo.status');;
 Route::get('/tranglo-tracker','ReportController@tranglotracker');
-Route::get('/tranglo-validation','ReportController@getTrangloValidation');
 Route::get('/invoice/{id}/{flg}','ReportController@generateInvoicePrint');
-Route::get('/calculate-au-point/{id}/{amount}/{country}','Service\RecipientServicesController@calculateAuPoint');
+//Route::get('/calculate-au-point/{id}/{amount}/{country}','Service\RecipientServicesController@calculateAuPoint');
 Route::get('/calculate-au-wallet-point/{id}/{amount}/{transferType}','Service\RecipientServicesController@calculateAuWalletPoint');
 
 // User Recipient

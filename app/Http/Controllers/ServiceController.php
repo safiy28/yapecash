@@ -64,9 +64,6 @@ class ServiceController extends Controller
         $data['amounts'] = $amounts['amounts'];
 
         switch ($service['short_code']) {
-            case 'sg':
-                $page = 'services.singapore_topup';
-                break;
             case 'my':
                 $page = 'services.malaysia_topup';
                 break;
@@ -76,17 +73,11 @@ class ServiceController extends Controller
             case 'nepal_reload':
                 $page = 'services.nepal_reload';
                 break;
-            case 'bd_mb_reload':
-                $page = 'services.bd_mb_reload';
-                break;
             case 'indo_pulsa':
                 $page = 'services.indo_pulsa';
                 break;
-            case 'metro':
+            case 'money':
                 $page = 'services.recipient';
-                break;
-            case 'recipient_wallet':
-                $page = 'services.recipient.recipient_wallet';
                 break;
             default:
                 $page = 'services.'.$service['type'];
